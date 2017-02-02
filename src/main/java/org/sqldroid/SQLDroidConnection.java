@@ -386,7 +386,7 @@ public class SQLDroidConnection implements Connection {
         this.autoCommit = autoCommit;
         if (autoCommit) {
         	if (sqlitedb.inTransaction()) { // to be on safe side
-                sqlitedb.setTransactionSuccessful(); // this will fail if no transaction is currently in progress; hence the check above
+                sqlitedb.setTransactionSuccessful();
                 Log.d("END TRANSACTION (autocommit on) " + Thread.currentThread().getId() + " \"" + Thread.currentThread().getName() + "\" " + this);
                 sqlitedb.endTransaction();
         	}

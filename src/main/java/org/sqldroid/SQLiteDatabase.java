@@ -180,6 +180,13 @@ public class SQLiteDatabase {
   public android.database.sqlite.SQLiteDatabase getSqliteDatabase() {
     return sqliteDatabase;
   }
+  
+ /** Checks if the current thread has a transaction pending in the database.
+   * @return true if the current thread has a transaction pending in the database
+   */
+  public boolean inTransaction() {
+      return sqliteDatabase.inTransaction();
+  }
 
   /** Executes one of the methods in the "transactions" enum. This just allows the
    * timeout code to be combined in one method. 
@@ -231,12 +238,6 @@ public class SQLiteDatabase {
    * @throws SQLException */
   public void endTransaction() throws SQLException {    
     execNoArgVoidMethod(Transaction.endTransaction);
-  }
-   
-  /** Checks if the current thread has a transaction pending in the database.
-   * @return true if the current thread has a transaction pending in the database */
-  public boolean inTransaction() {
-    return sqliteDatabase.inTransaction();
   }
 
   /** Call the "close" method on the database. 

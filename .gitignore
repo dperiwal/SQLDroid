@@ -1,20 +1,13 @@
 *~
-/pkg
 /target
 /lib/sqldroid/sqldroid-*.jar
-/sources_list.txt
-
-# Source: https://gist.github.com/nesquena/5617544/raw/53710b374e7df3302df43b552488d876040ada3d/.gitignore
+/Gemfile.lock
 
 # built application files
 *.apk
-*.ap_
 
 # files for the dex VM
 *.dex
-
-# Java class files
-*.class
 
 # generated files
 bin/
@@ -31,13 +24,11 @@ local.properties
 proguard/
 
 # Intellij project files
-*.iml
 *.ipr
 *.iws
 .idea/
 
 *.pydevproject
-.project
 .metadata
 bin/**
 tmp/**
@@ -46,8 +37,6 @@ tmp/**/*
 *.bak
 *.swp
 *~.nib
-local.properties
-.classpath
 .settings/
 .loadpath
 

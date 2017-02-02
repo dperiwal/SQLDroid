@@ -1,24 +1,13 @@
 package org.sqldroid;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.RowIdLifetime;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Types;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.database.MergeCursor;
+
+import java.sql.*;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SQLDroidDatabaseMetaData implements DatabaseMetaData {
 
@@ -822,10 +811,7 @@ public class SQLDroidDatabaseMetaData implements DatabaseMetaData {
 
 	@Override
 	public ResultSet getSchemas() throws SQLException {
-		System.err.println(" ********************* not implemented @ "
-				+ DebugPrinter.getFileName() + " line "
-				+ DebugPrinter.getLineNumber());
-		return null;
+	  throw new UnsupportedOperationException("getSchemas not supported by SQLite");
 	}
 
 	@Override
@@ -1014,10 +1000,7 @@ public class SQLDroidDatabaseMetaData implements DatabaseMetaData {
 
 	@Override
 	public String getURL() throws SQLException {
-		System.err.println(" ********************* not implemented @ "
-				+ DebugPrinter.getFileName() + " line "
-				+ DebugPrinter.getLineNumber());
-		return null;
+		return con.url();
 	}
 
 	@Override
@@ -1486,27 +1469,28 @@ public class SQLDroidDatabaseMetaData implements DatabaseMetaData {
 		return true;
 	}
 	
-	@Override
-	public boolean isWrapperFor(Class<?> arg0) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
-	}
+  @Override
+  public boolean isWrapperFor(Class<?> iface) throws SQLException {
+    return iface != null && iface.isAssignableFrom(getClass());
+  }
 
-	@Override
-	public <T> T unwrap(Class<T> arg0) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+  @Override
+  public <T> T unwrap(Class<T> iface) throws SQLException {
+    if (isWrapperFor(iface)) {
+      return (T) this;
+    }
+    throw new SQLException(getClass() + " does not wrap " + iface);
+  }
 
 	@Override
 	public boolean autoCommitFailureClosesAllResultSets() throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+	  // TODO Evaluate if this is a sufficient implementation (if so, remove this comment)
+	  return false;
 	}
 
 	@Override
 	public ResultSet getClientInfoProperties() throws SQLException {
-		// TODO Auto-generated method stub
+	  // TODO Evaluate if this is a sufficient implementation (if so, remove this comment)
 		return null;
 	}
 
@@ -1514,46 +1498,39 @@ public class SQLDroidDatabaseMetaData implements DatabaseMetaData {
 	public ResultSet getFunctionColumns(String catalog, String schemaPattern,
 			String functionNamePattern, String columnNamePattern)
 			throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	  throw new UnsupportedOperationException("getFunctionColumns not supported");
 	}
 
 	@Override
 	public ResultSet getFunctions(String catalog, String schemaPattern,
 			String functionNamePattern) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	  throw new UnsupportedOperationException("getFunctions not implemented yet");
 	}
 
 	@Override
 	public RowIdLifetime getRowIdLifetime() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		return RowIdLifetime.ROWID_UNSUPPORTED;
 	}
 
 	@Override
-	public ResultSet getSchemas(String catalog, String schemaPattern)
-			throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultSet getSchemas(String catalog, String schemaPattern) throws SQLException {
+	  throw new UnsupportedOperationException("getSchemas not implemented yet");
 	}
 
 	@Override
 	public boolean supportsStoredFunctionsUsingCallSyntax() throws SQLException {
-		// TODO Auto-generated method stub
+	  // TODO Evaluate if this is a sufficient implementation (if so, remove this comment)
 		return false;
 	}
 	
   // methods added for JDK7 compilation
 
   public boolean generatedKeyAlwaysReturned() throws SQLException {
-      // TODO Auto-generated method stub
-      return false;
+      throw new UnsupportedOperationException("generatedKeyAlwaysReturned not implemented yet");
   }
 
   public ResultSet getPseudoColumns(String catalog, String schemaPattern, String tableNamePattern, String columnNamePattern) throws SQLException {
-      // TODO Auto-generated method stub
-      return null;
+      throw new UnsupportedOperationException("getPseudoColumns not implemented yet");
   }
   
   /**
